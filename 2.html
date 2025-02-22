@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Downloader</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f0f0f0; }
+        input[type="text"] { width: 60%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        button { padding: 10px 20px; border: none; border-radius: 5px; background-color: #28a745; color: white; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        h1 { color: #333; }
+        #msg { margin-top: 20px; color: red; }
+    </style>
+</head>
+<body>
+
+    <h1>Simple Video Downloader</h1>
+    <input type="text" id="videoURL" placeholder="Enter direct video link (e.g., .mp4)">
+    <br><br>
+    <button onclick="downloadVideo()">Download Video</button>
+    <p id="msg"></p>
+
+    <script>
+        function downloadVideo() {
+            const url = document.getElementById('videoURL').value;
+            const msg = document.getElementById('msg');
+
+            if (!url) {
+                msg.textContent = "Please enter a video URL!";
+                return;
+            }
+
+            // Create an anchor tag to trigger download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '';  // Let browser decide filename
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            msg.textContent = "Download started! 🚀";
+        }
+    </script>
+
+</body>
+</html>
