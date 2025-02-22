@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terabox Link Downloader</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f0f0f0; }
+        input[type="text"] { width: 60%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        button { padding: 10px 20px; border: none; border-radius: 5px; background-color: #007bff; color: white; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        h1 { color: #333; }
+        #msg { margin-top: 20px; color: red; }
+    </style>
+</head>
+<body>
+
+    <h1>Terabox Video Downloader</h1>
+    <input type="text" id="fileURL" placeholder="Paste Terabox Link Here">
+    <br><br>
+    <button onclick="downloadFile()">Download</button>
+    <p id="msg"></p>
+
+    <script>
+        async function downloadFile() {
+            const url = document.getElementById('fileURL').value;
+            const msg = document.getElementById('msg');
+
+            if (!url) {
+                msg.textContent = "Please paste a Terabox link!";
+                return;
+            }
+
+            try {
+                msg.textContent = "Fetching download link...";
+
+                // Fetching the redirected URL
+                const response = await fetch(url, { method: 'GET', redirect: 'follow' });
+                const finalURL = response.url;
+
+                if (finalURL === url) {
+                    msg.textContent = "Couldn't fetch the direct download link!";
+                    return;
+                }
+
+                // Create an anchor tag to download
+                const a = document.createElement('a');
+                a.href = finalURL;
+                a.download = ''; // Let browser handle file name
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                msg.textContent = "Download started! 🚀";
+
+            } catch (error) {
+                console.error(error);
+                msg.textContent = "Error fetching download link!";
+            }
+        }
+    </script>
+
+</body>
+</html>
