@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terabox Link Downloader</title>
+    <title>Link Downloader</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f0f0f0; }
         input[type="text"] { width: 60%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
@@ -15,8 +15,8 @@
 </head>
 <body>
 
-    <h1>Terabox Video Downloader</h1>
-    <input type="text" id="fileURL" placeholder="Paste Terabox Link Here">
+    <h1>Video Downloader</h1>
+    <input type="text" id="fileURL" placeholder="Paste Link Here">
     <br><br>
     <button onclick="downloadFile()">Download</button>
     <p id="msg"></p>
@@ -27,7 +27,7 @@
             const msg = document.getElementById('msg');
 
             if (!url) {
-                msg.textContent = "Please paste a Terabox link!";
+                msg.textContent = "Please paste a link!";
                 return;
             }
 
